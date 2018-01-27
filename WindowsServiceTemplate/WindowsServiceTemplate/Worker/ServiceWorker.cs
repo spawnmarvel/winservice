@@ -15,7 +15,7 @@ namespace WindowsServiceTemplate.Worker
         public ServiceWorker(string name)
         {
             this.name = name;
-            //dbCon = new DataBaseConnection();
+            dbCon = new DataBaseConnection();
         }
 
 

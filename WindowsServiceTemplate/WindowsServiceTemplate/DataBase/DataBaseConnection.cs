@@ -104,7 +104,7 @@ namespace WindowsServiceTemplate.DataBase
             try
             {
 
-                using (StreamReader file = File.OpenText("auth.json"))
+                using (StreamReader file = File.OpenText(@"\auth\auth.json"))
                 using (JsonTextReader reader = new JsonTextReader(file))
                 {
                     JObject authFile = (JObject)JToken.ReadFrom(reader);
