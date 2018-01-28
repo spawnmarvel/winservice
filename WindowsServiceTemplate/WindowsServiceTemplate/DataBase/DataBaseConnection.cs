@@ -24,7 +24,8 @@ namespace WindowsServiceTemplate.DataBase
         /// </summary>
         public DataBaseConnection()
         {
-            setUpConnection(readJsonMakeConnectionString());
+            //setUpConnection(readJsonMakeConnectionString());
+            readJsonMakeConnectionString();
         }
         /// <summary>
         /// set up connection
@@ -32,14 +33,28 @@ namespace WindowsServiceTemplate.DataBase
         /// <param name="auth"></param>
         public void setUpConnection(string auth)
         {
-            logger.Info("Set up connection string json");
-            string[] rv = auth.Split(';');
-            string host = rv[0];
-            string database = rv[1];
-            int port = Convert.ToInt32(rv[2]);
-            string user = rv[3];
-            string pass = rv[4];
-            conString = String.Format("Server={0};Port={1};" + "User Id={2};Password={3};Database={4};", host, port, user, pass, database);
+            try
+            {
+                if (auth.Length < 10)
+                {
+
+                }
+                else
+                {
+                    logger.Info("Set up connection string json");
+                    string[] rv = auth.Split(';');
+                    string host = rv[0];
+                    string database = rv[1];
+                    int port = Convert.ToInt32(rv[2]);
+                    string user = rv[3];
+                    string pass = rv[4];
+                    conString = String.Format("Server={0};Port={1};" + "User Id={2};Password={3};Database={4};", host, port, user, pass, database);
+                }
+            }
+            catch (Exception msg) {
+                logger.Error(msg + " Connection string is not on valid format ");
+            }
+           
 
         }
         /// <summary>
@@ -104,7 +119,7 @@ namespace WindowsServiceTemplate.DataBase
             try
             {
 
-                using (StreamReader file = File.OpenText(@"\auth\auth.json"))
+                using (StreamReader file = File.OpenText(@"auth\auth.json"))
                 using (JsonTextReader reader = new JsonTextReader(file))
                 {
                     JObject authFile = (JObject)JToken.ReadFrom(reader);
@@ -123,6 +138,10 @@ namespace WindowsServiceTemplate.DataBase
             catch (FileNotFoundException msg)
             {
                 logger.Debug(msg);
+            }
+            catch (Exception msg)
+            {
+                logger.Error(msg);
             }
             logger.Debug("Read json file status: " + status);
             return jAuth;

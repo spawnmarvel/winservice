@@ -20,7 +20,7 @@ namespace WindowsServiceTemplate
         public ServiceTemplate()
         {
             InitializeComponent();
-            serviceWorker = new ServiceWorker("Jinbot");
+           
 
         }
 
@@ -28,6 +28,7 @@ namespace WindowsServiceTemplate
         {
             logger.Info("********************");
             logger.Info("Service started main");
+            serviceWorker = new ServiceWorker("Jinbot");
             serviceWorker.doWork();
         }
 
