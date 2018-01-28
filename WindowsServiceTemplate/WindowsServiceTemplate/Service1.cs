@@ -27,8 +27,10 @@ namespace WindowsServiceTemplate
         protected override void OnStart(string[] args)
         {
             logger.Info("********************");
+            logger.Info("******************");
+            logger.Info("****************");
             logger.Info("Service started main");
-            serviceWorker = new ServiceWorker("Jinbot");
+            serviceWorker = new ServiceWorker("BOT42");
             serviceWorker.doWork();
         }
 

@@ -24,8 +24,8 @@ namespace WindowsServiceTemplate.DataBase
         /// </summary>
         public DataBaseConnection()
         {
-            //setUpConnection(readJsonMakeConnectionString());
-            readJsonMakeConnectionString();
+            setUpConnection(readJsonMakeConnectionString());
+           
         }
         /// <summary>
         /// set up connection
@@ -48,8 +48,14 @@ namespace WindowsServiceTemplate.DataBase
                     int port = Convert.ToInt32(rv[2]);
                     string user = rv[3];
                     string pass = rv[4];
+                    logger.Info("Host: " + host + " db: " + database + " port: " + port + " user: " + user + " pass: auth.json");
                     conString = String.Format("Server={0};Port={1};" + "User Id={2};Password={3};Database={4};", host, port, user, pass, database);
+                    logger.Debug(conString);
                 }
+            }
+            catch (System.ArgumentException msg)
+            {
+                logger.Error(msg);
             }
             catch (Exception msg) {
                 logger.Error(msg + " Connection string is not on valid format ");
@@ -143,7 +149,8 @@ namespace WindowsServiceTemplate.DataBase
             {
                 logger.Error(msg);
             }
-            logger.Debug("Read json file status: " + status);
+            logger.Info("Read json file status: " + status);
+            logger.Debug(jAuth);
             return jAuth;
         }
     }
