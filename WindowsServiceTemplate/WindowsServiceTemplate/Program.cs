@@ -57,7 +57,7 @@ namespace WindowsServiceTemplate
                 Console.Write("Started\n");
 
             }
-            testWorker.doWork();
+            testWorker.startWork();
             Console.WriteLine("Press any key to stop the service and end the process\n");
             Console.ReadKey();
 

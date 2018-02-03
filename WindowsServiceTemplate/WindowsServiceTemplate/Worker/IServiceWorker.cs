@@ -9,7 +9,8 @@ namespace WindowsServiceTemplate.Worker
     interface IServiceWorker
     {
 
-        void doWork();
+        void startWork();
+        void work();
         void stopWork();
 
     }

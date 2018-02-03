@@ -31,7 +31,7 @@ namespace WindowsServiceTemplate
             logger.Info("****************");
             logger.Info("Service started main");
             serviceWorker = new ServiceWorker("BOT42");
-            serviceWorker.doWork();
+            serviceWorker.startWork();
         }
 
         protected override void OnStop()
