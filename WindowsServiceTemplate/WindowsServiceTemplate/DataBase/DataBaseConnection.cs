@@ -129,7 +129,7 @@ namespace WindowsServiceTemplate.DataBase
                 using (JsonTextReader reader = new JsonTextReader(file))
                 {
                     JObject authFile = (JObject)JToken.ReadFrom(reader);
-                    //logger.Debug(reader.TokenType + " " + reader.ValueType + " " + reader.Value);
+                    logger.Debug(reader.TokenType + " " + reader.ValueType + " " + reader.Value);
                     foreach (KeyValuePair<string, JToken> keyValue in authFile)
                     {
                         //get the values

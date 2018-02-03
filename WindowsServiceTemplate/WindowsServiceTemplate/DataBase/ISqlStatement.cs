@@ -8,7 +8,7 @@ namespace WindowsServiceTemplate.DataBase
 {
     interface ISqlStatement
     {
-        void insert(string data);
+        void insert(string content, string url);
         void update();
         void delete();
         void read();

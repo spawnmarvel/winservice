@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Npgsql;
 
 namespace WindowsServiceTemplate.DataBase
 {
@@ -19,12 +20,31 @@ namespace WindowsServiceTemplate.DataBase
             throw new NotImplementedException();
         }
 
-        public void insert(string data)
+        public void insert(string content, string url)
         {
-            con.openDb();
-            logger.Info("Insert arrived : " + data);
-            logger.Info("Insert completed");
-            con.closeDb();
+           
+            try
+            {
+                con.openDb();
+                logger.Info("Insert arrived : " + content + " " + url);
+                NpgsqlCommand cmd = con.getConnection().CreateCommand();
+                string sql = "insert into data_collector (data_content, data_url) values ('" + content + "','" + url + "'" + ");";
+                logger.Info("\n" + sql);
+                cmd.CommandText = sql;
+                int rows = cmd.ExecuteNonQuery();
+                logger.Info("Insert status " + rows);
+                con.closeDb();
+            }
+            catch (NpgsqlException msg)
+            {
+                logger.Error(msg);
+            }
+            catch (Exception msg)
+            {
+                logger.Error(msg);
+            }
+            
+            
             
         }
 

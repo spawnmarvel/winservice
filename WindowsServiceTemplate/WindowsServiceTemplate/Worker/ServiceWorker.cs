@@ -26,7 +26,7 @@ namespace WindowsServiceTemplate.Worker
         public void doWork()
         {
             logger.Info("Start do work Service: " + Name);
-            controller.insertDb("Test an insert bla, bla");
+            controller.insertDb("Second content", "myurl");
 
         }
 

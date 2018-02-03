@@ -13,7 +13,9 @@ namespace WindowsServiceTemplate.Controller
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ControlWorker));
         private SqlStatement sql;
        
-
+        /// <summary>
+        /// Controlls the process for service worker, handles db etc
+        /// </summary>
         public ControlWorker()
         {
             sql = new SqlStatement();
@@ -21,10 +23,20 @@ namespace WindowsServiceTemplate.Controller
            
         }
 
-        public void insertDb(string data)
+        public void insertDb(string content, string url)
         {
-           logger.Info(data);
-           sql.insert(data);
+           logger.Info(content + " " + url);
+           sql.insert(content, url);
+            try
+            {
+                //sql.read();
+            }
+            catch (Exception msg)
+            {
+                logger.Error(msg);
+            }
+
+
         }
     }
 }
